@@ -4,14 +4,14 @@ FROM node:20
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
-COPY package*.json ./
-
 # Set ownership of the /app directory to the node user
 RUN chown -R node:node /app
 
 # Switch to the non-root user
 USER node
+
+# Copy package.json and package-lock.json first
+COPY --chown=node:node ./package.json ./package-lock.json ./
 
 # Install dependencies
 RUN npm install
