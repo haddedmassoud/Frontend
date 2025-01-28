@@ -7,21 +7,20 @@ WORKDIR /app
 # Copy package.json and package-lock.json first
 COPY package*.json ./
 
+# Set ownership of the /app directory to the node user
+RUN chown -R node:node /app
+
+# Switch to the non-root user
+USER node
+
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code
-COPY . .
-
-# Set file permissions and ownership
-RUN chmod 644 /app/vite.config.ts && \
-    chown -R node:node /app
+COPY --chown=node:node . .
 
 # Expose the port the app runs on
 EXPOSE 3000
-
-# Switch to non-root user
-USER node
 
 # Command to run the application
 CMD ["npm", "run", "dev"]
