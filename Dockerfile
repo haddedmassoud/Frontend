@@ -15,8 +15,7 @@ COPY . .
 
 # Set file permissions and ownership
 RUN chmod 644 /app/vite.config.ts && \
-    chown node:node /app/vite.config.ts && \
-    chown -R node:node /app/node_modules
+    chown -R node:node /app
 
 # Expose the port the app runs on
 EXPOSE 3000
