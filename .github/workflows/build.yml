@@ -14,13 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Set file permissions
-    - name: Set file permissions
-      run: |
-        sudo chmod 644 /app/vite.config.ts
-        sudo chown $USER:$USER /app/vite.config.ts
-        sudo chown -R $USER:$USER ./node_modules
-
     # Step 3: Log in to GitHub Container Registry
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v2
